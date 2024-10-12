@@ -1,19 +1,19 @@
+'use client';
+
 import React from 'react';
+import { useFavorites } from '@/context/favoritesContext';
 import { Emails } from '@/interface/email';
 import { formatDate } from '@/utils/formatDate';
 
-interface EmailBody {
-  id: string;
-  body: string;
+interface EmailDetailsProps {
+  emails: Emails;
+  emailBody: { id: string; body: string };
 }
 
-const EmailDetails: React.FC<{ emails: Emails; emailBody: EmailBody }> = ({
-  emails,
-  emailBody,
-}) => {
+const EmailDetails: React.FC<EmailDetailsProps> = ({ emails, emailBody }) => {
   const matchedEmail = emails.list.find((email) => email.id === emailBody.id);
+  const { favorites, toggleFavorite } = useFavorites();
 
-  // If no email matches, return null or an alternative UI like a message
   if (!matchedEmail) {
     return (
       <p className="text-center text-sm text-gray-500">
@@ -21,6 +21,9 @@ const EmailDetails: React.FC<{ emails: Emails; emailBody: EmailBody }> = ({
       </p>
     );
   }
+
+  const handleToggleFavorite = () => toggleFavorite(matchedEmail.id);
+  const isFavorite = favorites.includes(emailBody.id);
 
   return (
     <div className="mx-auto">
@@ -33,8 +36,15 @@ const EmailDetails: React.FC<{ emails: Emails; emailBody: EmailBody }> = ({
             <h2 className="text-2xl font-bold text-text">
               {matchedEmail.subject}
             </h2>
-            <button className="rounded-full bg-accent px-3 py-1.5 text-sm text-white">
-              Mark as favorite
+            <button
+              onClick={handleToggleFavorite}
+              className={`rounded-full px-3 py-1.5 text-sm ${
+                isFavorite
+                  ? 'bg-yellow-400 text-gray-800'
+                  : 'bg-accent text-white'
+              }`}
+            >
+              {isFavorite ? 'Remove from favorites' : 'Mark as favorite'}
             </button>
           </div>
           <footer className="mt-6 text-sm text-text">
