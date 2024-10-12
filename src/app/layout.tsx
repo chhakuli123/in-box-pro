@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 
 import '@/styles/globals.css';
 
+import { FavoritesProvider } from '@/context/favoritesContext';
+
 import { siteConfig } from '@/config/site';
 import { inter } from '@/lib/fonts';
 
@@ -26,7 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={`min-h-screen antialiased ${inter.className}`}>
-        {children}
+        <FavoritesProvider>{children}</FavoritesProvider>
       </body>
     </html>
   );
