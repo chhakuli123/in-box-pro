@@ -1,3 +1,10 @@
-export default function Home() {
-  return <h1>InBoxPro</h1>;
-}
+import { EmailList } from '@/components';
+import { fetchEmails } from '@/services';
+
+const page = async () => {
+  const getAllEmails = await fetchEmails();
+
+  return <EmailList emails={getAllEmails} />;
+};
+
+export default page;
