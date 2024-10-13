@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { EmailList } from '@/components';
 import { fetchEmailDetails, fetchEmails } from '@/services/api/emailServices';
 
@@ -17,11 +18,13 @@ const page = async ({ params, searchParams }: PageProps) => {
   return (
     <div className="flex flex-col bg-background px-12 md:flex-row ">
       <div className="mr-6 w-full md:w-1/2">
-        <EmailList
-          initialEmails={emails}
-          totalEmails={total}
-          currentPage={currentPage}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <EmailList
+            initialEmails={emails}
+            totalEmails={total}
+            currentPage={currentPage}
+          />
+        </Suspense>
       </div>
       <div className="mx-2 mb-6 h-[calc(100vh-14vh)]  w-full overflow-y-auto rounded-lg border border-border bg-white p-8">
         <EmailDetails emails={emails} emailBody={emailDetails} />
