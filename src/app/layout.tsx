@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
 
 import '@/styles/globals.css';
@@ -32,8 +33,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={`min-h-screen bg-background antialiased ${inter.className}`}
       >
         <EmailProvider>
-          <TopBar />
-          {children}
+          <Suspense fallback={<div>Loading...</div>}>
+            <TopBar />
+            {children}
+          </Suspense>
         </EmailProvider>
       </body>
     </html>

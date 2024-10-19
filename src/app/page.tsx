@@ -6,22 +6,22 @@ interface PageProps {
   searchParams: { page?: string; filter?: string };
 }
 
-export default async function Page({ searchParams }: PageProps) {
+export default async function page({ searchParams }: PageProps) {
   const currentPage = parseInt(searchParams.page || '1', 10);
   const filter = searchParams.filter || 'all';
 
   const { list: emails, total } = await fetchEmails(currentPage);
 
   return (
-    <div className="px-12">
-      <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="px-12">
         <EmailList
           initialEmails={emails}
           totalEmails={total}
           currentPage={currentPage}
           filter={filter}
         />
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 }

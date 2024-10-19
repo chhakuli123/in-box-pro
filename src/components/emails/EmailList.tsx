@@ -17,6 +17,7 @@ const EmailList: React.FC<EmailListProps> = ({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const currentId = pathname.split('/').pop();
   const totalPages = Math.ceil(totalEmails / 10);
 
   if (!initialEmails) {
@@ -91,7 +92,11 @@ const EmailList: React.FC<EmailListProps> = ({
         {filteredEmails.map((email) => (
           <li key={email.id}>
             <div
-              className="flex cursor-pointer gap-4 rounded-lg border border-border bg-white px-6 py-3 hover:bg-gray-100"
+              className={`flex cursor-pointer gap-4 rounded-lg border   ${
+                email.id === currentId
+                  ? 'border-2 border-accent'
+                  : 'border-border'
+              } bg-white px-6 py-3 hover:bg-gray-100`}
               onClick={() => handleEmailClick(email.id)}
             >
               <aside className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent text-lg font-semibold text-white">
