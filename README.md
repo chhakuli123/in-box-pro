@@ -17,7 +17,7 @@ This project is a simple email client app designed to manage and view emails usi
 - **Date Format**: Dates are shown in `dd/MM/yyyy hh:mm a` format.
 - **Pagination**: Handles long email lists using pagination.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Next.js**: React framework for server-side rendering and routing.
 - **TypeScript**: For type-safe development.
