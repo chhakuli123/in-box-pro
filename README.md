@@ -2,7 +2,7 @@
 
 This project is a simple email client app designed to manage and view emails using provided APIs. The app allows users to view email lists, read email details, mark emails as favorites, and filter emails based on various criteria.
 
-## 🌟 Features
+## Features
 
 - **Email List View**: Displays a list of emails with sender, subject, short description, and date/time.
 - **Split Screen View**: Clicking on an email shows its details in a split view format:
